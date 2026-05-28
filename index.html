@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ دل کی بات - گفٹ کوئز ✨</title>
+    <!-- Importing beautiful, premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #ffeef1 0%, #ffd1dc 100%);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 141, 161, 0.4);
+            --primary-color: #ff6584;
+            --text-color: #4a4a4a;
+            --accent-color: #ffb7c5;
+            --box-glow: 0 0 25px rgba(255, 101, 132, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating Urdu Words Background - Enhanced Opacity for Clear Visibility */
+        .word-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .floating-word {
+            position: absolute;
+            font-weight: bold;
+            color: rgba(255, 101, 132, 0.45); 
+            font-family: 'Nastaliq', 'Noto Nastaliq Urdu', 'Segoe UI', serif;
+            white-space: nowrap;
+            user-select: none;
+            animation: floatAnimation 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatAnimation {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-35px) rotate(4deg); }
+        }
+
+        /* Upgraded Container Box */
+        .container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 2px solid var(--glass-border);
+            padding: 45px 35px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(255, 101, 132, 0.15), var(--box-glow);
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: pulseGlow 4s ease-in-out infinite alternate;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(255, 101, 132, 0.22), 0 0 35px rgba(255, 101, 132, 0.4);
+            border-color: rgba(255, 101, 132, 0.6);
+        }
+
+        /* Decorative Aesthetic Ribbon on Top */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ff9aa2, #ffb7b2, #ffdac1, #e2f0cb, #b5ead7, #ffb7c5);
+            background-size: 200% auto;
+            animation: gradientMove 3s linear infinite;
+        }
+
+        /* Sparkle Accents */
+        .corner-accent {
+            position: absolute;
+            font-size: 18px;
+            color: var(--primary-color);
+            opacity: 0.6;
+            user-select: none;
+        }
+        .top-left { top: 15px; left: 20px; }
+        .top-right { top: 15px; right: 20px; }
+
+        /* Welcome Screen Profile Picture Style */
+        .profile-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffffff;
+            box-shadow: 0 8px 20px rgba(255, 101, 132, 0.25);
+            margin: 0 auto 20px auto;
+            display: block;
+            animation: avatarEntrance 1s ease-out;
+        }
+
+        @keyframes avatarEntrance {
+            from { opacity: 0; transform: scale(0.5) rotate(-15deg); }
+            to { opacity: 1; transform: scale(1) rotate(0); }
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 20px 40px rgba(255, 101, 132, 0.12), 0 0 20px rgba(255, 101, 132, 0.15); }
+            100% { box-shadow: 0 20px 40px rgba(255, 101, 132, 0.18), 0 0 30px rgba(255, 101, 132, 0.3); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 28px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.03);
+            font-weight: 800;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95) translateY(15px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Inputs & Buttons */
+        input[type="text"] {
+            font-family: 'Poppins', sans-serif;
+            width: 85%;
+            padding: 14px 20px;
+            border: 2px solid var(--accent-color);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            font-size: 15px;
+            outline: none;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 12px rgba(255, 101, 132, 0.25);
+            width: 90%;
+        }
+
+        .btn {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff6584 0%, #ff476c 100%);
+            color: white;
+            border: none;
+            padding: 14px 38px;
+            font-size: 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 6px 18px rgba(255, 71, 108, 0.35);
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(255, 71, 108, 0.45);
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .option-btn {
+            font-family: 'Poppins', sans-serif;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 141, 161, 0.25);
+            padding: 16px;
+            border-radius: 18px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 500;
+            color: #555;
+            transition: all 0.25s ease;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.02);
+        }
+
+        .option-btn:hover {
+            background: white;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateX(6px);
+            box-shadow: 0 5px 15px rgba(255, 101, 132, 0.12);
+        }
+
+        .loader {
+            border: 4px solid rgba(255, 141, 161, 0.2);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            animation: spin 1s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+            margin: 25px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="word-background" id="wordBg"></div>
+
+<div class="container">
+    <div class="corner-accent top-left">✨</div>
+    <div class="corner-accent top-right">💖</div>
+    
+    <!-- SCREEN 1: WELCOME WITH PROFILE PICTURE -->
+    <div id="screen1" class="screen active">
+        <img class="profile-avatar" src="686045092_18092889518587297_172143317415444910_n.jpg" alt="Profile Picture">
+        <h1>✨ Gift Finder 3000 ✨</h1>
+        <p>Welcome! Let's get things set up first.</p>
+        <input type="text" id="yourName" placeholder="Your Name" required><br>
+        <input type="text" id="gfName" placeholder="Him Name" required><br>
+        <button class="btn" onclick="startQuiz()">Access Granted ➔</button>
+    </div>
+
+    <!-- SCREEN 2: SNACK QUESTION -->
+    <div id="screen2" class="screen">
+        <h1>🍿 Question 1</h1>
+        <p>You are watching a movie, so what thing do you want to eat?</p>
+        <div class="options-container">
+            <button class="option-btn" onclick="saveAnswer('snack', 'Sweet & Chocolatey')">🍫 Sweet & Chocolatey (Chocolates, brownies, cookies)</button>
+            <button class="option-btn" onclick="saveAnswer('snack', 'Savory & Crunchy')">🍟 Savory & Crunchy (Chips, popcorn, spicy snacks)</button>
+            <button class="option-btn" onclick="saveAnswer('snack', 'Baked Goods & Tea')">🧁 Baked Goods (Pastries, macaroons, cozy warm drinks)</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 3: MAIN GIFT CATEGORY -->
+    <div id="screen3" class="screen">
+        <h1>🎁 Question 2</h1>
+        <p>If a surprise parcel arrives at your doorstep tomorrow, what are you hoping is inside?</p>
+        <div class="options-container">
+            <button class="option-btn" onclick="saveAnswer('category', 'Jewelry & Accessories')">✨ A shiny little box (Delicate jewelry to wear daily)</button>
+            <button class="option-btn" onclick="saveAnswer('category', 'Dress & Apparel')">👗 A gorgeous new outfit (Something cute that makes you feel amazing)</button>
+            <button class="option-btn" onclick="saveAnswer('category', 'Skincare & Self-Care')">🧴 A luxury pampering session (Aesthetic skincare and face masks)</button>
+            <button class="option-btn" onclick="saveAnswer('category', 'Total Mystery Upgrade')">❓ A total mystery upgrade (Surprise me completely!)</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 4: STYLE/COLOR AESTHETIC -->
+    <div id="screen4" class="screen">
+        <h1>🎨 Question 3</h1>
+        <p>Which aesthetic matches your current vibe perfectly?</p>
+        <div class="options-container">
+            <button class="option-btn" onclick="saveAnswer('style', 'Minimalist & Classic')">🤍 Minimalist & Classic (Clean, simple, silver/gold tones)</button>
+            <button class="option-btn" onclick="saveAnswer('style', 'Cute & Pastel')">🌸 Cute & Pastel (Soft colors, adorable aesthetic styles)</button>
+            <button class="option-btn" onclick="saveAnswer('style', 'Bold & Elegant')">🍷 Bold & Elegant (Statement pieces, rich deep colors)</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 5: PROCESSING LOADER -->
+    <div id="screen5" class="screen">
+        <h1>Processing Answers...</h1>
+        <p>Analyzing compatibility data and calculating the perfect gift blueprint...</p>
+        <div class="loader"></div>
+    </div>
+
+    <!-- SCREEN 6: THE FINAL SURPRISE SCREEN -->
+    <div id="screen6" class="screen">
+        <h1>💖 System Complete! 💖</h1>
+        <p id="finalMessage"></p>
+        <p><i>Your answers have been securely transmitted to your favorite person. Keep an eye out for surprises! 🤫✨</i></p>
+    </div>
+
+</div>
+
+<script>
+    // Embedded unique Formspree URL endpoint
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/mqejngak";
+
+    const urduWords = ["خوبصورت", "حسین", "جمیل", "دلکش", "دل آویز", "خوب رو", "دیدہ زیب", "خوش شکل", "پرکشش", "شہزادی", "ایکسپریشنز", "سوتی ہوئی", "بدھو"];
+
+    function createFloatingBackground() {
+        const bgContainer = document.getElementById('wordBg');
+        const wordCount = 24; 
+
+        for (let i = 0; i < wordCount; i++) {
+            const wordEl = document.createElement('div');
+            wordEl.className = 'floating-word';
+            
+            const randomWord = urduWords[Math.floor(Math.random() * urduWords.length)];
+            wordEl.innerText = randomWord;
+
+            const randomLeft = Math.floor(Math.random() * 92); 
+            const randomTop = Math.floor(Math.random() * 92);  
+            const randomSize = Math.floor(Math.random() * 14) + 16; 
+            const randomDelay = (Math.random() * 6).toFixed(1);
+            const randomDuration = (Math.random() * 4 + 7).toFixed(1); 
+
+            wordEl.style.left = `${randomLeft}%`;
+            wordEl.style.top = `${randomTop}%`;
+            wordEl.style.fontSize = `${randomSize}px`;
+            wordEl.style.animationDelay = `${randomDelay}s`;
+            wordEl.style.animationDuration = `${randomDuration}s`;
+
+            bgContainer.appendChild(wordEl);
+        }
+    }
+
+    window.onload = createFloatingBackground;
+
+    let quizData = {
+        user: '',
+        gf: '',
+        snack: '',
+        category: '',
+        style: ''
+    };
+
+    function startQuiz() {
+        const user = document.getElementById('yourName').value.trim();
+        const gf = document.getElementById('gfName').value.trim();
+
+        if (user === '' || gf === '') {
+            alert('Please fill in both fields! 💕');
+            return;
+        }
+
+        quizData.user = user;
+        quizData.gf = gf;
+
+        switchScreen('screen1', 'screen2');
+    }
+
+    function saveAnswer(key, value) {
+        quizData[key] = value;
+
+        if (key === 'snack') {
+            switchScreen('screen2', 'screen3');
+        } else if (key === 'category') {
+            switchScreen('screen3', 'screen4');
+        } else if (key === 'style') {
+            switchScreen('screen4', 'screen5');
+            sendResultsToEmail();
+        }
+    }
+
+    function switchScreen(oldId, newId) {
+        document.getElementById(oldId).classList.remove('active');
+        document.getElementById(newId).classList.add('active');
+    }
+
+    function sendResultsToEmail() {
+        // Silently POST data to Formspree server in the background
+        fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "User Name": quizData.user,
+                "Him Name": quizData.gf,
+                "Snack Choice": quizData.snack,
+                "Gift Category": quizData.category,
+                "Aesthetic Style": quizData.style
+            })
+        })
+        .then(response => {
+            console.log("Data successfully transmitted.");
+        })
+        .catch(error => {
+            console.error("Network issue, but quiz proceeding:", error);
+        })
+        .finally(() => {
+            // Wait out the loading spinner look, then switch screens
+            setTimeout(() => {
+                switchScreen('screen5', 'screen6');
+                document.getElementById('finalMessage').innerHTML = `Thank you, <strong>${quizData.user}</strong>! Your order request has been sent to <strong>${quizData.gf}</strong>.`;
+            }, 3000);
+        });
+    }
+</script>
+
+</body>
+</html>
